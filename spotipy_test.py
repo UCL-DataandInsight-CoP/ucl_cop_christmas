@@ -3,6 +3,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 import requests
 import json
 from bs4 import BeautifulSoup
+import pandas as pd
 
 def request_song_info(song_title, artist_name):
     base_url = 'https://api.genius.com'
@@ -41,6 +42,18 @@ username = 'Spotify'
 playlist_id = '37i9dQZF1DX0Yxoavh5qJV'
 results = sp.user_playlist(username, playlist_id)
 #print(results)
+
+artist_name = []
+track_name = []
+url = []
+danceability = []
+energy = []
+loudness = []
+valence = []
+temp = []
+lyrics = []
+
+
 for song in results['tracks']['items']:
     title = song['track']['name']
     artist = song['track']['artists'][0]['name']
@@ -63,9 +76,37 @@ for song in results['tracks']['items']:
             break
     if remote_song_info:
         song_url = remote_song_info['result']['url']
-        lyrics = scrap_song_url(song_url)
+        song_lyrics = scrap_song_url(song_url)
+    else:
+        song_lyrics = 'NO MATCH'
 
-    print(title + ', ' + artist + ', ' + song_link + ', ' + str(features), lyrics)
+    print('Appending: ' + artist + ', ' + title)
+    artist_name.append(artist)
+    track_name.append(title)
+    url.append(song_link)
+    danceability.append(song_danceability)
+    energy.append(song_energy)
+    loudness.append(song_loudness)
+    valence.append(song_valence)
+    temp.append(song_temp)
+    lyrics.append(song_lyrics.replace(',', ''))
+
+track_dataframe = pd.DataFrame({'artist_name' : artist_name,
+                                'track_name' : track_name,
+                                'url' : url,
+                                'danceability' : danceability,
+                                'energy': energy,
+                                'loudness': loudness,
+                                'valence': valence,
+                                'temp': temp,
+                                'lyrics': lyrics})
+
+print(track_dataframe)
+track_dataframe.to_csv('christmas_songs.csv', index=False)
+
+    
+
+    #print(title + ', ' + artist + ', ' + song_link + ', ' + str(features), lyrics)
 
 
 
