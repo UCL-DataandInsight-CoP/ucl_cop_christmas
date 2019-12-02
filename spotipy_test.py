@@ -14,15 +14,6 @@ def request_song_info(song_title, artist_name):
 
     return response
 
-def request_song_info(song_title, artist_name):
-    base_url = 'https://api.genius.com'
-    headers = {'Authorization': 'Bearer ' + 'XfY0zl7MRjxuzVzMK9Z9tJy7ddLF64wgSIC2SUMcKdlQ4wMWUkkTEFkrr2iAMfFN'}
-    search_url = base_url + '/search'
-    data = {'q': song_title + ' ' + artist_name}
-    response = requests.get(search_url, data=data, headers=headers)
-
-    return response
-
 def scrap_song_url(url):
     page = requests.get(url)
     html = BeautifulSoup(page.text, 'html.parser')
