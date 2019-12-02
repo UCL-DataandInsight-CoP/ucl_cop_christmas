@@ -92,6 +92,7 @@ track_dataframe = pd.DataFrame({'artist_name' : artist_name,
                                 'temp': temp,
                                 'lyrics': lyrics})
 
+track_dataframe = track_dataframe[track_dataframe['lyrics'] != 'NO MATCH']
 print(track_dataframe)
 track_dataframe.to_csv('christmas_songs.csv', index=False)
 
