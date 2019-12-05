@@ -121,7 +121,7 @@ def main():
         arrays will be used as Pandas Series' for final DataFrame construction
         '''
         for song in results['tracks']['items']:
-            if song['track']['name'] is not None:
+            if song['track']['name'] is not None and song['track']['artists'] is not None:
                 playlist_title = playlist_name
                 title = song['track']['name']
                 artist = song['track']['artists'][0]['name']
