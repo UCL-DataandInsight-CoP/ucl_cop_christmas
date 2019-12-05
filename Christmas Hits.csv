@@ -1,4 +1,4 @@
-playlist_name,artist_name,track_name,url,danceability,energy,loudness,valence,temp,lyrics
+playlist_name,artist_name,track_name,url,danceability,energy,loudness,valence,tempo,lyrics
 Christmas Hits,Mariah Carey,All I Want for Christmas Is You,https://open.spotify.com/track/0bYg9bo50gSsH3LtXe2SQn,0.335,0.625,-7.462,0.346,150.277,"
 
 [Intro]
@@ -949,7 +949,7 @@ I mean a big fat man with a long white beard
 He's coming to town
 
 "
-Christmas Hits,Tony Bennett,Winter Wonderland,https://open.spotify.com/track/4ricyQVd20UQde1jpXCSuJ,0.452,0.366,-14.15,0.629,115.006,"
+Christmas Hits,Tony Bennett,Winter Wonderland,https://open.spotify.com/track/4ricyQVd20UQde1jpXCSuJ,0.217,0.267,-15.715,0.208,78.416,"
 
 Sleigh bells ring are you listening
 In the lane snow is glistening
