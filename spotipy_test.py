@@ -4,6 +4,8 @@ import requests
 import json
 from bs4 import BeautifulSoup
 import pandas as pd
+import os
+import glob
 
 def request_song_info(song_title, artist_name):
     base_url = 'https://api.genius.com'
@@ -104,20 +106,46 @@ for playlist_id in playlists:
                                     'energy': energy,
                                     'loudness': loudness,
                                     'valence': valence,
-                                    'temp': temp,
+                                    'tempo': temp,
                                     'lyrics': lyrics})
 
     track_dataframe = track_dataframe[track_dataframe['lyrics'] != 'NO MATCH']
+    #track_dataframe['wordlist'] = track_dataframe['lyrics'].split(' ')
+    
+
+    #def top_ten_words(lyrics):
+    #    import nltk 
+    #    nltk.download('stopwords')
+    #    nltk.download('punkt')
+    #    from nltk.corpus import stopwords 
+    #    from nltk.tokenize import word_tokenize
+    #    from collections import Counter
+    #    stop_words = set(stopwords.words('english')) 
+    #    word_tokens = word_tokenize(lyrics) 
+    #    filtered_lyrics = [w for w in word_tokens if not w in stop_words] 
+    #    c = Counter(filtered_lyrics)
+    #    top_ten = c.most_common(10)
+    #    return top_ten
+  
+
+    #track_dataframe['top_ten_lyrics'] = track_dataframe['lyrics'].apply(top_ten_words)
+
     print(track_dataframe)
     track_dataframe.to_csv(str(playlist_name) + '.csv', index=False)
 
         
 
-        #print(title + ', ' + artist + ', ' + song_link + ', ' + str(features), lyrics)
+ 
 
 
+extension = 'csv'
+all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
 
 
+#combine all files in the list
+combined_csv = pd.concat([pd.read_csv(f) for f in all_filenames ])
+#export to csv
+combined_csv.to_csv( "All Playlists Combined.csv", index=False, encoding='utf-8-sig')
 
 
 
