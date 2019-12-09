@@ -170,6 +170,13 @@ def main():
             temp.append(song_temp)
             lyrics.append(song_lyrics.replace(',', '')) # append lyrics, remove commas to avoid csv conflicts
 
+            '''
+            write lyrics to text file
+            '''
+            christmas_lyrics = open("christmas_lyrics.txt","a+")
+            if song_lyrics != 'NO MATCH':
+                christmas_lyrics.write(str(song_lyrics) + "\n")
+
         '''
         build Pandas dataframe from collected arrays/Series'
         '''
