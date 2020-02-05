@@ -100,6 +100,34 @@ for playlist_id in playlists:
             song_loudness = sp.audio_features(song_id)[0]['loudness']
             song_valence = sp.audio_features(song_id)[0]['valence']
             song_temp = sp.audio_features(song_id)[0]['tempo']
+
+        '''
+        append to arrays
+        '''
+        print('Appending: ' + artist + ', ' + title)
+        artist_name.append(artist)
+        track_name.append(title)
+        url.append(song_link)
+        danceability.append(song_danceability)
+        energy.append(song_energy)
+        loudness.append(song_loudness)
+        valence.append(song_valence)
+        temp.append(song_temp)
+
+        '''
+        build Pandas dataframe from collected arrays/Series'
+        '''
+        track_dataframe = pd.DataFrame({'playlist_name' : playlist_title,
+                                        'artist_name' : artist_name,
+                                        'track_name' : track_name,
+                                        'url' : url,
+                                        'danceability' : danceability,
+                                        'energy': energy,
+                                        'loudness': loudness,
+                                        'valence': valence,
+                                        'tempo': temp,
+                                        'lyrics': lyrics})
 ```
+
 
 <img src="dataframe.PNG?raw=true"/>
