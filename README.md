@@ -218,3 +218,50 @@ lyrics.append(song_lyrics.replace(',', '')) # append lyrics, remove commas to av
 
 <img src="lyrics.PNG?raw=true"/>
 
+#### Extracting the Data
+
+For each Playlist DataFrame, the results were outputted to csv files:
+
+```python
+'''
+For each DataFrame, representing a playlist, export as individual csv file
+'''
+track_dataframe.to_csv(str(playlist_name) + '.csv', index=False)
+```
+
+and once all csv files are exported, a combined csv file of all the song data
+collected is produced by looping through each file and concatonating 
+into a new Pandas DataFrame for export:
+
+```python
+'''
+once all playlists have been processed, each will have a .csv file populated
+
+for all .csv files created, append together to create a combined, final output of
+all playlists
+'''
+extension = 'csv'
+all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
+
+'''
+concat the playlist csv' and export as combined dataset
+'''
+#combine all files in the list
+combined_csv = pd.concat([pd.read_csv(f) for f in all_filenames ])
+#export to csv
+combined_csv.to_csv( "All Playlists Combined.csv", index=False, encoding='utf-8-sig')
+```
+
+In addition, all of the contents of the lyrics were written to a seperate text file
+to create a corpus of all of the words used in Christmas songs, to be used to
+create a word cloud visualisation in the next stage:
+
+```python
+'''
+write lyrics to text file
+'''
+christmas_lyrics = open("christmas_lyrics.txt","a+")
+if song_lyrics != 'NO MATCH':
+    christmas_lyrics.write(str(song_lyrics) + "\n")
+```
+
