@@ -131,3 +131,58 @@ for playlist_id in playlists:
 
 
 <img src="dataframe.PNG?raw=true"/>
+
+#### Scraping Song Lyrics, Genius.com
+
+Genius is a website/API containing lyrics for a wide variety of songs. Once the playlist
+tracks were searched and stored from Spotify, the Genius API was used to find matches
+and BeautifulSoup was used to scrape the lyrics from the matches Genius webpages.
+
+The following function allows a song title and artist to be passed in, here using
+the results from Spotify, and to return a match to the Genius.com webpage containing
+the lyrics for that song:
+
+```python
+'''
+genius_song_details
+
+get song details through search of genius api
+
+title: String, song title
+artist: String, artist name
+
+returns API RESPONSE
+'''
+def genius_song_details(title, artist):
+    genius_api = 'https://api.genius.com'
+    headers = {'Authorization': 'Bearer ' + ''}
+    genius_search = genius_api + '/search'
+    data = {'q': title + ' ' + artist}
+    response = requests.get(genius_search, data=data, headers=headers)
+
+    return response
+```
+
+Once a matching webpage has been found, the following function uses
+BeautifulSoup to scrape the lyrics by exploting the common structure
+of Genius.com lyrics webpages:
+
+```python
+'''
+scrape_lyrics
+
+Use the Beautiful Soup library to scrape Genius.com lyrics pages
+Exploits html/structure tags
+
+url: genius API url
+
+returns: lyrics, HTML formatting
+'''
+def scrape_lyrics(url):
+    link = requests.get(url)
+    html = BeautifulSoup(link.text, 'html.parser')
+    [elem.extract() for elem in html('script')]
+    lyrics = html.find('div', class_='lyrics').get_text()
+
+    return lyrics
+```
