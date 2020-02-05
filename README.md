@@ -265,3 +265,16 @@ if song_lyrics != 'NO MATCH':
     christmas_lyrics.write(str(song_lyrics) + "\n")
 ```
 
+### Data Visualisation
+
+#### Christmas Lyrics Wordcloud
+
+For the visualisation, I used the collection of christmas lyrics
+to create a wordcloud of the most commonly used words.
+
+```python
+text = " ".join(lyrics for lyrics in df.lyrics)
+print ("{} total words in lyrics.".format(len(text)))
+
+1811704 total words in lyrics.
+```
