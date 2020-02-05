@@ -31,7 +31,7 @@ returns API RESPONSE
 '''
 def genius_song_details(title, artist):
     genius_api = 'https://api.genius.com'
-    headers = {'Authorization': 'Bearer ' + 'XfY0zl7MRjxuzVzMK9Z9tJy7ddLF64wgSIC2SUMcKdlQ4wMWUkkTEFkrr2iAMfFN'}
+    headers = {'Authorization': 'Bearer ' + ''}
     genius_search = genius_api + '/search'
     data = {'q': title + ' ' + artist}
     response = requests.get(genius_search, data=data, headers=headers)
