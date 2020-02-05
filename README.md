@@ -5,25 +5,32 @@
 Source christmas songs and lyrics data from the Spotify and Genius APIs using Python. Create an
 interesting visualisation. 
 
-### Data Collection
+### Data Collection Pipeline
 
-<img src="tree.png?raw=true"/>
+The data colelction pipeline for this project collects song information from all official
+Spotify Christmas playlists using the Spotify API and then scraped the associated song lyrics
+from Genius.com
+
+CSVs are crated for each playlist and a combined file of all the songs created. The lyrics are also
+stored seperately as text only for later analysis and visualisation.
+
+#### Collecting Spotify Christmas Songs
+
+A connection to the Spotify API was establised using the Spotipy python library with authentication
+keys generated from the Spotify developer's portal:
 
 ```python
-class StdOutListener(StreamListener):
-    def on_data(self, data):
-        producer.send_messages("kafka_twitter_stream_json", data.encode('utf-8'))
-        #print (data)
-        return True
-    def on_error(self, status):
-        print (status)
-    def on_limit(self,status):
-        print ("Twitter API Rate Limit")
-        print("Waiting...")
-        time.sleep(15 * 60) # wait 15 minutes and try again
-        print("Resuming")
-        return True
-```
-On each data event ‘on_data’ I am using the Kafka-Python library to create a producer and send the
-tweet data as a message to the required Kafka topic:
+import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
 
+cid = ''
+secret = ''
+client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
+sp = spotipy.Spotify(client_credentials_manager = client_credentials_manager)
+```
+
+The cid and secret variables can be replaced with a user's own keys.
+
+
+
+<img src="tree.png?raw=true"/>
