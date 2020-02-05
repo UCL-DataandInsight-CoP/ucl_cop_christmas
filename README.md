@@ -278,3 +278,42 @@ print ("{} total words in lyrics.".format(len(text)))
 
 1811704 total words in lyrics.
 ```
+
+Common english stopwords (the, I, and etc.....) were removed to prevent them from domintating
+the most used words:
+
+```python
+stopwords = set(STOPWORDS)
+```
+
+```python
+Initially, I created a basic wordcloud of the top 1000 christmas lyrics used:
+
+
+# Create a word cloud image
+wc = WordCloud(background_color="black", max_words=1000, mask=transformed_tree_mask,
+               stopwords=stopwords, contour_width=3, contour_color='firebrick')
+
+# Generate a wordcloud
+wc.generate(text)
+
+# store to file
+#wc.to_file("img/wine.png")
+
+# show
+plt.figure(figsize=[20,10])
+plt.imshow(wc, interpolation='bilinear')
+plt.axis("off")
+plt.show()
+```
+
+<img src="basic_wordcloud.PNG?raw=true"/>
+
+Following this, taking inspiration from a wordcloud shaped and colored as [Alice in Wonderland](https://raw.githubusercontent.com/fuqiuai/wordCloud/master/Images/alice.png) from the WordCloud python library documentation, I used a simple vector image of a Christmas Tree:
+
+<img src="tree.png?raw=true"/>
+
+to create a shape and colour mask to
+fit a custom Christmas Song Lyric Tree WordCloud visualisation:
+
+<img src="word_cloud.png?raw=true"/>
