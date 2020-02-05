@@ -66,9 +66,8 @@ output to csv for further analysis
 def main():
 
     # manage API credentials for Spotify and Genius
-    # consider moving details to seperate file and importing if code shared publically !!
-    cid = '0786700255834c229778011930c57d24'
-    secret = 'd9565e37c7584e9fab41e95df0ffa3c5'
+    cid = ''
+    secret = ''
     client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
     sp = spotipy.Spotify(client_credentials_manager = client_credentials_manager)
 
@@ -132,7 +131,6 @@ def main():
                 song_loudness = sp.audio_features(song_id)[0]['loudness']
                 song_valence = sp.audio_features(song_id)[0]['valence']
                 song_temp = sp.audio_features(song_id)[0]['tempo']
-                features = [song_danceability, song_energy, song_loudness, song_temp, song_valence]
 
             '''
             collect lyrics matches from Genius...
