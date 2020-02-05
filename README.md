@@ -1,6 +1,6 @@
 ## UCL Community of Practice: Christmas Songs
 
-### Outline
+### UCL Community of Practice Christmas Meetup Data Competition
 
 Source christmas songs and lyrics data from the Spotify and Genius APIs using Python. Create an
 interesting visualisation. 
