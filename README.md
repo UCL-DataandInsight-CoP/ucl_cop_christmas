@@ -186,3 +186,35 @@ def scrape_lyrics(url):
 
     return lyrics
 ```
+
+These were utilised to source and add the lyrics for each song
+to the DataFrames:
+
+```python
+'''
+collect lyrics matches from Genius...
+'''
+genius_api_response = genius_song_details(title, artist)
+json = genius_api_response.json()
+remote_song_info = None
+'''
+for each song in the playist
+retrieve the song title and artist name and pass to Genius API scraper function
+if there is a match, scrape/retrieve the lyrics
+if not record NO MATCH
+'''
+for hit in json['response']['hits']:
+    if artist.lower() in hit['result']['primary_artist']['name'].lower():
+        remote_song_info = hit
+        break
+if remote_song_info:
+    song_url = remote_song_info['result']['url']
+    song_lyrics = scrape_lyrics(song_url)
+else:
+    song_lyrics = 'NO MATCH'
+
+lyrics.append(song_lyrics.replace(',', '')) # append lyrics, remove commas to avoid csv conflicts
+```
+
+<img src="lyrics.PNG?raw=true"/>
+
