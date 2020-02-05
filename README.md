@@ -102,4 +102,4 @@ for playlist_id in playlists:
             song_temp = sp.audio_features(song_id)[0]['tempo']
 ```
 
-<img src="dataframe.png?raw=true"/>
+<img src="dataframe.PNG?raw=true"/>
