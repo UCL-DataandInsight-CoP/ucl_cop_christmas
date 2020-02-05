@@ -316,4 +316,26 @@ Following this, taking inspiration from a wordcloud shaped and colored as [Alice
 to create a shape and colour mask to
 fit a custom Christmas Song Lyric Tree WordCloud visualisation:
 
+```python
+d = path.dirname(__file__) if "__file__" in locals() else os.getcwd()
+
+
+text = open(path.join(d, 'christmas_lyrics.txt'), encoding="utf-8").read()
+mask = np.array(Image.open(path.join(d, "tree.png")))
+wc = WordCloud(background_color="black", max_words=100, mask=mask,
+               max_font_size=40, random_state=42)
+wc.generate(text)
+
+# create coloring from image
+image_colors = ImageColorGenerator(mask)
+
+# create the word cloud
+plt.figure(figsize=[15,15])
+plt.imshow(wc.recolor(color_func=image_colors), interpolation="bilinear")
+
+# save Christmas Tree word cloud as image
+wc.recolor(color_func=image_colors).to_file(path.join(d, "word_cloud.png"))
+plt.axis("off")
+```
+
 <img src="word_cloud.png?raw=true"/>
